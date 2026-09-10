@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<structure>
+  <type>mealy</type>
+  <automaton>
+    <state id="0" name="q0">
+      <x>100.0</x>
+      <y>250.0</y>
+      <initial/>
+    </state>
+    <state id="1" name="q5">
+      <x>300.0</x>
+      <y>100.0</y>
+    </state>
+    <state id="2" name="q10">
+      <x>300.0</x>
+      <y>250.0</y>
+    </state>
+    <state id="3" name="q15">
+      <x>300.0</x>
+      <y>400.0</y>
+    </state>
+    <state id="4" name="q20">
+      <x>500.0</x>
+      <y>100.0</y>
+    </state>
+    <state id="5" name="q25">
+      <x>500.0</x>
+      <y>400.0</y>
+    </state>
+
+    <transition><from>0</from><to>1</to><read>A</read><transout>ε</transout></transition>
+    <transition><from>0</from><to>2</to><read>B</read><transout>ε</transout></transition>
+    <transition><from>0</from><to>5</to><read>C</read><transout>ε</transout></transition>
+
+    <transition><from>1</from><to>2</to><read>A</read><transout>ε</transout></transition>
+    <transition><from>1</from><to>3</to><read>B</read><transout>ε</transout></transition>
+    <transition><from>1</from><to>0</to><read>C</read><transout>PRODUTO</transout></transition>
+
+    <transition><from>2</from><to>3</to><read>A</read><transout>ε</transout></transition>
+    <transition><from>2</from><to>4</to><read>B</read><transout>ε</transout></transition>
+    <transition><from>2</from><to>0</to><read>C</read><transout>PRODUTO + TROCO 5c</transout></transition>
+
+    <transition><from>3</from><to>4</to><read>A</read><transout>ε</transout></transition>
+    <transition><from>3</from><to>5</to><read>B</read><transout>ε</transout></transition>
+    <transition><from>3</from><to>0</to><read>C</read><transout>PRODUTO + TROCO 10c</transout></transition>
+
+    <transition><from>4</from><to>5</to><read>A</read><transout>ε</transout></transition>
+    <transition><from>4</from><to>0</to><read>B</read><transout>PRODUTO</transout></transition>
+    <transition><from>4</from><to>0</to><read>C</read><transout>PRODUTO + TROCO 15c</transout></transition>
+
+    <transition><from>5</from><to>0</to><read>A</read><transout>PRODUTO</transout></transition>
+    <transition><from>5</from><to>0</to><read>B</read><transout>PRODUTO + TROCO 5c</transout></transition>
+    <transition><from>5</from><to>0</to><read>C</read><transout>PRODUTO + TROCO 20c</transout></transition>
+  </automaton>
+</structure>
