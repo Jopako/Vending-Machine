@@ -38,7 +38,7 @@ function Home({ onNext }: HomeProps) {
           className="next-button"
           onClick={onNext}
         >
-          Próximo
+          Ir às compras!
         </button>
       </div>
     </main>

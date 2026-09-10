@@ -51,14 +51,11 @@ function App() {
   const [change, setChange] = useState(0)
 
   const progress = Math.min((balance / 30) * 100, 100)
-
   const lastTransition = history.at(-1)
 
   const machineStatus = useMemo(() => {
     if (delivered) return 'Produto entregue!'
-
     if (balance > 0) return 'Crédito inserido'
-
     return 'Aguardando moedas...'
   }, [delivered, balance])
 
@@ -68,7 +65,6 @@ function App() {
     const from = state
     const total = balance + coin
     const to = transition(state, coin)
-
     const newChange = calculateChange(total)
 
     const output =
@@ -92,10 +88,8 @@ function App() {
     if (total >= 30) {
       setDelivered(true)
       setChange(newChange)
-
       setState(0)
       setBalance(0)
-
       return
     }
 
@@ -111,289 +105,290 @@ function App() {
     setChange(0)
   }
 
+  if (screen === 'home') {
+    return (
+      <Home
+        onNext={() => setScreen('machine')}
+      />
+    )
+  }
+
   return (
-    <>
-      {screen === 'home' ? (
-        <Home
-          onNext={() => setScreen('machine')}
-        />
-      ) : (
-        <main>
-          <header className="topbar">
-            <div className="price-chip">
-              PRODUTO <strong>30¢</strong>
+    <main className="machine-page">
+      <header className="topbar">
+       
+
+      </header>
+
+      <section className="machine-layout">
+        <div className="machine-side">
+          <section className="machine panel">
+            <div className="machine-visual">
+              <div className="machine-stack">
+                <img
+                  src={vendingFront}
+                  alt="Frente da máquina de vendas"
+                />
+
+                <img
+                  src={vendingOutput}
+                  alt="Saída do produto"
+                />
+              </div>
+
+              <div className="coin-area">
+                <h3>Inserir moeda</h3>
+
+                <div className="coin-grid">
+                  {coins.map((coin) => (
+                    <button
+                      className="coin"
+                      key={coin}
+                      onClick={() => insertCoin(coin)}
+                      disabled={delivered}
+                      aria-label={`Inserir moeda de ${coin} centavos`}
+                    >
+                      <img
+                        className="coin-image"
+                        src={coinImages[coin]}
+                        alt={`Moeda de ${coin} centavos`}
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
-          </header>
+          </section>
 
-          <section className="layout">
-            <div className="machine panel">
-              <div className="machine-content">
-                <div className="machine-sprite">
-                  <div className="machine-stack">
-                    <img
-                      src={vendingFront}
-                      alt="Frente da máquina de vendas"
-                    />
+          <button
+            className="reset"
+            onClick={reset}
+          >
+            <RotateCcw size={18} />
+            Reiniciar máquina
+          </button>
+        </div>
 
-                    <img
-                      src={vendingOutput}
-                      alt="Saída do produto"
-                    />
-                  </div>
-                </div>
+        <section className="machine-controls">
+          <h1 className="controls-title">
+            Acompanhe o funcionamento da máquina
+          </h1>
 
-                <div className="coin-area">
-                  <h3 className="coin-insert">
-                    Inserir moeda
-                  </h3>
+          <div className="machine-screen">
+            <span className="screen-dot" />
 
-                  <div className="coin-grid">
-                    {coins.map((coin) => (
-                      <button
-                        className="coin"
-                        key={coin}
-                        onClick={() => insertCoin(coin)}
-                        disabled={delivered}
-                        aria-label={`Inserir moeda de ${coin} centavos`}
-                      >
-                        <img
-                          className="coin-image"
-                          src={coinImages[coin]}
-                          alt={`Moeda de ${coin} centavos`}
-                        />
-                      </button>
-                    ))}
-                  </div>
-                </div>
+            <div className="screen-text">
+              <small>STATUS</small>
+              <strong>{machineStatus}</strong>
+            </div>
+
+            <div className="screen-state">
+              {stateLabel(state)}
+            </div>
+          </div>
+
+          <div className="balance-box">
+            <div className="balance-head">
+              <span>Saldo inserido</span>
+
+              <strong>{balance}¢</strong>
+            </div>
+
+            <div className="progress">
+              <div
+                style={{
+                  width: `${progress}%`
+                }}
+              />
+            </div>
+
+            <span className="muted">
+              {Math.max(0, 30 - balance)}¢ restantes
+            </span>
+          </div>
+
+          {delivered && (
+            <div className="success">
+              <div className="success-icon">
+                <Check size={18} />
               </div>
 
-              <div className="machine-status">
-                <div className="machine-screen">
-                  <span className="screen-dot" />
+              <div>
+                <strong>Produto liberado!</strong>
 
-                  <div>
-                    <small>STATUS</small>
-                    <strong>{machineStatus}</strong>
-                  </div>
-
-                  <div className="screen-state">
-                    {stateLabel(state)}
-                  </div>
-                </div>
-              </div>
-
-              <div className="balance-box">
-                <div className="balance-head">
-                  <span>Saldo inserido</span>
-
-                  <strong>
-                    {balance}¢
-                  </strong>
-                </div>
-
-                <div className="progress">
-                  <div
-                    style={{
-                      width: `${progress}%`
-                    }}
-                  />
-                </div>
-
-                <span className="muted">
-                  {Math.max(0, 30 - balance)}¢ restantes
+                <span>
+                  {change > 0
+                    ? `Troco devolvido: ${change}¢`
+                    : 'Sem troco.'
+                  }
                 </span>
               </div>
 
-              {delivered && (
-                <div className="success">
-                  <div className="success-icon">
-                    <Check size={18} />
-                  </div>
+              <Sparkles
+                size={20}
+                className="success-sparkle"
+              />
+            </div>
+          )}
 
-                  <div>
-                    <strong>
-                      Produto liberado!
-                    </strong>
+          <section className="panel automaton">
+            <div className="section-title">
+              <div>
+                <span className="eyebrow">
+                  AUTÔMATO EM TEMPO REAL
+                </span>
 
-                    <span>
-                      {change > 0
-                        ? `Troco devolvido: ${change}¢`
-                        : 'Sem troco.'
-                      }
-                    </span>
-                  </div>
+                <h2>Estados</h2>
+              </div>
 
-                  <Sparkles
-                    size={20}
-                    className="success-sparkle"
-                  />
-                </div>
-              )}
-
-              <button
-                className="reset"
-                onClick={reset}
-              >
-                <RotateCcw size={17} />
-                Reiniciar máquina
-              </button>
+              <CircleDollarSign />
             </div>
 
-            <div className="side">
-              <section className="panel automaton">
-                <div className="section-title">
-                  <div>
-                    <h2>Estados</h2>
+            <div className="state-track">
+              {states.map((s, index) => (
+                <div
+                  className="state-wrap"
+                  key={s}
+                >
+                  <div
+                    className={`state-node ${
+                      s === state ? 'active' : ''
+                    }`}
+                  >
+                    <span>
+                      {stateLabel(s)}
+                    </span>
+
+                    <small>
+                      {s}¢
+                    </small>
                   </div>
 
-                  <CircleDollarSign />
-                </div>
-
-                <div className="state-track">
-                  {states.map((s, index) => (
+                  {index < states.length - 1 && (
                     <div
-                      className="state-wrap"
-                      key={s}
+                      className={`arrow ${
+                        state === states[index + 1]
+                          ? 'lit'
+                          : ''
+                      }`}
                     >
-                      <div
-                        className={`state-node ${
-                          s === state ? 'active' : ''
-                        }`}
-                      >
-                        <span>
-                          {stateLabel(s)}
-                        </span>
-
-                        <small>
-                          {s}¢
-                        </small>
-                      </div>
-
-                      {index < states.length - 1 && (
-                        <div
-                          className={`arrow ${
-                            state === states[index + 1]
-                              ? 'lit'
-                              : ''
-                          }`}
-                        >
-                          →
-                        </div>
-                      )}
+                      →
                     </div>
-                  ))}
-                </div>
-
-                <div className="current-state">
-                  <span>ESTADO ATUAL</span>
-
-                  <strong>
-                    {stateLabel(state)}
-                  </strong>
-
-                  <p>
-                    {stateMeaning(state)}
-                  </p>
-                </div>
-
-                <div className="transition-card">
-                  <span>ÚLTIMA TRANSIÇÃO</span>
-
-                  {lastTransition ? (
-                    <>
-                      <div>
-                        <strong>
-                          {stateLabel(lastTransition.from)}
-                        </strong>
-
-                        <b>
-                          — {lastTransition.coin}¢ →
-                        </b>
-
-                        <strong>
-                          {stateLabel(lastTransition.to)}
-                        </strong>
-                      </div>
-
-                      {lastTransition.output && (
-                        <p className="transition-output">
-                          {lastTransition.output}
-                        </p>
-                      )}
-                    </>
-                  ) : (
-                    <p>
-                      Nenhuma moeda inserida ainda.
-                    </p>
                   )}
                 </div>
-              </section>
+              ))}
+            </div>
 
-              <section className="panel history">
-                <div className="section-title">
+            <div className="current-state">
+              <span>ESTADO ATUAL</span>
+
+              <strong>
+                {stateLabel(state)}
+              </strong>
+
+              <p>
+                {stateMeaning(state)}
+              </p>
+            </div>
+
+            <div className="transition-card">
+              <span>ÚLTIMA TRANSIÇÃO</span>
+
+              {lastTransition ? (
+                <>
                   <div>
-                    <span className="eyebrow">
-                      EXECUÇÃO
-                    </span>
+                    <strong>
+                      {stateLabel(lastTransition.from)}
+                    </strong>
 
-                    <h2>Histórico</h2>
+                    <b>
+                      — {lastTransition.coin}¢ →
+                    </b>
+
+                    <strong>
+                      {stateLabel(lastTransition.to)}
+                    </strong>
                   </div>
 
-                  <span className="counter">
-                    {history.length}
-                  </span>
-                </div>
-
-                {history.length === 0 ? (
-                  <div className="empty">
-                    Insira uma moeda para começar
-                    a execução.
-                  </div>
-                ) : (
-                  <div className="history-list">
-                    {history.map((item, index) => (
-                      <div
-                        className="history-row"
-                        key={item.id}
-                      >
-                        <span>
-                          {String(index + 1).padStart(2, '0')}
-                        </span>
-
-                        <strong>
-                          {stateLabel(item.from)}
-                        </strong>
-
-                        <b>
-                          — {item.coin}¢ →
-                        </b>
-
-                        <strong
-                          className={
-                            item.to === state
-                              ? 'current'
-                              : ''
-                          }
-                        >
-                          {stateLabel(item.to)}
-                        </strong>
-
-                        {item.output && (
-                          <small className="history-output">
-                            {item.output}
-                          </small>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </section>
+                  {lastTransition.output && (
+                    <p className="transition-output">
+                      {lastTransition.output}
+                    </p>
+                  )}
+                </>
+              ) : (
+                <p>
+                  Nenhuma moeda inserida ainda.
+                </p>
+              )}
             </div>
           </section>
-        </main>
-      )}
 
-    </>
+          <section className="panel history">
+            <div className="section-title">
+              <div>
+                <span className="eyebrow">
+                  EXECUÇÃO
+                </span>
+
+                <h2>Histórico</h2>
+              </div>
+
+              <span className="counter">
+                {history.length}
+              </span>
+            </div>
+
+            {history.length === 0 ? (
+              <div className="empty">
+                Insira uma moeda para começar a execução.
+              </div>
+            ) : (
+              <div className="history-list">
+                {history.map((item, index) => (
+                  <div
+                    className="history-row"
+                    key={item.id}
+                  >
+                    <span>
+                      {String(index + 1).padStart(
+                        2,
+                        '0'
+                      )}
+                    </span>
+
+                    <strong>
+                      {stateLabel(item.from)}
+                    </strong>
+
+                    <b>
+                      — {item.coin}¢ →
+                    </b>
+
+                    <strong
+                      className={
+                        item.to === state
+                          ? 'current'
+                          : ''
+                      }
+                    >
+                      {stateLabel(item.to)}
+                    </strong>
+
+                    {item.output && (
+                      <small className="history-output">
+                        {item.output}
+                      </small>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+
+        </section>
+      </section>
+    </main>
   )
 }
 
