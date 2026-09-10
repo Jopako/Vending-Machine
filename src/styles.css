@@ -9,7 +9,7 @@
     sans-serif;
 
   color: #e9edf5;
-  background: #07090d;
+  background: #3f3f74;
 
   font-synthesis: none;
 }
@@ -24,13 +24,22 @@ body {
   min-height: 100vh;
 
   background:
-    radial-gradient(circle at 20% 0%, rgba(73, 110, 255, 0.1), transparent 30%),
+    radial-gradient(
+      circle at 20% 0%,
+      rgba(203, 219, 252, 0.2),
+      transparent 30%
+    ),
     radial-gradient(
       circle at 90% 20%,
-      rgba(45, 220, 160, 0.07),
-      transparent 25%
+      rgba(31, 31, 81, 0.45),
+      transparent 35%
     ),
-    #07090d;
+    linear-gradient(
+      135deg,
+      #3f3f74 0%,
+      #303060 55%,
+      #22224d 100%
+    );
 }
 
 button {
@@ -44,22 +53,219 @@ main {
 }
 
 /* =========================
+   HOME
+========================= */
+
+.home {
+  width: 100%;
+  min-height: 100vh;
+
+  position: relative;
+  overflow: hidden;
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at 75% 35%,
+      rgba(82, 224, 167, 0.06),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #3f3f74 0%,
+      #303060 55%,
+      #22224d 100%
+    );
+}
+
+.home-character {
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 95%;
+  max-width: 1600px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+.home-character img {
+  display: block;
+
+  width: 100%;
+  max-width: 1900px;
+  height: auto;
+
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+
+  object-fit: contain;
+  object-position: bottom left;
+
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* =========================
+   BALÃO DE FALA
+========================= */
+
+.home-dialog {
+  position: relative;
+  z-index: 2;
+
+  width: min(700px, calc(100% - 40px));
+
+  transform: translateY(-180px);
+
+  margin-left: 22%;
+  margin-right: 20%;
+
+  padding: 30px;
+
+  background: #ffffff;
+  color: #222;
+
+  border: none;
+  border-radius: 18px;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================
+   PONTA DO BALÃO
+========================= */
+
+.home-dialog::before {
+  content: "";
+
+  position: absolute;
+
+  left: -18px;
+  bottom: 45px;
+
+  width: 0;
+  height: 0;
+
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 20px solid #ffffff;
+}
+
+/* =========================
+   TEXTO DO BALÃO
+========================= */
+
+.home-dialog .eyebrow {
+  display: block;
+
+  color: #555;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 0.03em;
+
+  line-height: 1.5;
+}
+
+.home-dialog h1 {
+  margin-top: 10px;
+
+  color: #222;
+
+  font-size: clamp(32px, 5vw, 48px);
+
+  line-height: 1.1;
+
+  letter-spacing: -0.03em;
+}
+
+.home-dialog p {
+  margin-top: 16px;
+
+  color: #333;
+
+  font-size: 18px;
+
+  font-weight: 500;
+
+  line-height: 1.6;
+}
+
+.home-dialog strong {
+  color: #111;
+
+  font-weight: 800;
+}
+
+/* =========================
+   BOTÃO PRÓXIMO
+========================= */
+
+.next-button {
+  margin-top: 28px;
+
+  padding: 13px 22px;
+
+  border: 1px solid #52e0a7;
+
+  border-radius: 12px;
+
+  background: #52e0a7;
+  color: #08110e;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.next-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 25px rgba(82, 224, 167, 0.2);
+}
+
+/* =========================
    TOPO
 ========================= */
 
 .topbar {
   display: flex;
+
   justify-content: space-between;
   align-items: flex-end;
 
   gap: 24px;
+
   margin-bottom: 28px;
 }
 
 .eyebrow {
   color: #778198;
+
   font-size: 11px;
   font-weight: 800;
+
   letter-spacing: 0.16em;
 }
 
@@ -73,25 +279,31 @@ h1 {
   margin-top: 7px;
 
   font-size: clamp(32px, 5vw, 52px);
+
   line-height: 1;
+
   letter-spacing: -0.045em;
 }
 
 .topbar p {
   color: #8992a4;
+
   margin-top: 12px;
 }
 
 .price-chip {
   border: 1px solid #252c38;
+
   border-radius: 14px;
 
   padding: 12px 16px;
 
   color: #8c96aa;
+
   font-size: 11px;
 
   letter-spacing: 0.12em;
+
   white-space: nowrap;
 }
 
@@ -101,6 +313,7 @@ h1 {
   margin-left: 8px;
 
   font-size: 16px;
+
   letter-spacing: 0;
 }
 
@@ -120,9 +333,11 @@ h1 {
   background: rgba(15, 18, 25, 0.88);
 
   border: 1px solid #202631;
+
   border-radius: 22px;
 
-  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.22);
+  box-shadow:
+    0 20px 70px rgba(0, 0, 0, 0.22);
 }
 
 /* =========================
@@ -130,60 +345,19 @@ h1 {
 ========================= */
 
 .machine {
-  padding: 22px;
+  padding: 10px;
 }
 
-.machine-screen {
+.machine-content {
   display: grid;
 
   grid-template-columns:
-    auto
-    1fr
-    auto;
+    minmax(0, 1fr)
+    132px;
 
-  align-items: center;
+  gap: 9px;
 
-  gap: 12px;
-
-  background: #090c11;
-
-  border: 1px solid #1e2630;
-  border-radius: 15px;
-
-  padding: 13px 15px;
-}
-
-.screen-dot {
-  width: 8px;
-  height: 8px;
-
-  border-radius: 50%;
-
-  background: #52e0a7;
-
-  box-shadow: 0 0 14px #52e0a7;
-}
-
-.machine-screen small,
-.machine-screen strong {
-  display: block;
-}
-
-.machine-screen small {
-  color: #6f798c;
-
-  font-size: 9px;
-  letter-spacing: 0.14em;
-}
-
-.machine-screen strong {
-  margin-top: 2px;
-  font-size: 13px;
-}
-
-.screen-state {
-  color: #52e0a7;
-  font-weight: 800;
+  align-items: stretch;
 }
 
 /* =========================
@@ -192,16 +366,19 @@ h1 {
 
 .machine-sprite {
   width: 100%;
+
   max-width: 600px;
+
   aspect-ratio: 2 / 3;
 
   margin: 16px 0;
 
   display: flex;
+
   justify-content: center;
   align-items: center;
 
-  border-radius: 0px;
+  border-radius: 0;
 
   background:
     radial-gradient(
@@ -221,7 +398,9 @@ h1 {
   height: 100%;
 
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
 }
 
@@ -230,16 +409,14 @@ h1 {
 
   width: 100%;
   height: auto;
+
   max-width: none;
 
-  /*
-    Importante para pixel art.
-    Evita blur ao aumentar a imagem.
-  */
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 
   user-select: none;
+
   -webkit-user-drag: none;
 }
 
@@ -251,11 +428,13 @@ h1 {
   padding: 18px;
 
   border: 1px solid #222a35;
+
   border-radius: 16px;
 }
 
 .balance-head {
   display: flex;
+
   justify-content: space-between;
   align-items: center;
 }
@@ -263,6 +442,7 @@ h1 {
 .balance-head span,
 .muted {
   color: #7e889a;
+
   font-size: 12px;
 }
 
@@ -289,7 +469,8 @@ h1 {
 
   border-radius: inherit;
 
-  transition: width 0.25s ease;
+  transition:
+    width 0.25s ease;
 }
 
 /* =========================
@@ -298,6 +479,20 @@ h1 {
 
 .coin-area {
   margin-top: 22px;
+}
+
+.coin-insert {
+  padding-left: 22px;
+
+  font-weight: bold;
+}
+
+.machine-content .coin-area {
+  margin: 16px 0;
+
+  display: flex;
+
+  flex-direction: column;
 }
 
 .coin-area h3 {
@@ -311,17 +506,34 @@ h1 {
 .coin-grid {
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns:
+    repeat(3, 1fr);
 
   gap: 10px;
 }
 
+.machine-content .coin-grid {
+  flex: 1;
+
+  grid-template-columns: 1fr;
+
+  grid-template-rows:
+    repeat(3, minmax(0, 1fr));
+}
+
+.machine-content .coin {
+  min-height: 0;
+}
+
 .coin {
   min-height: 100px;
+
   padding: 0;
+
   overflow: hidden;
 
   display: grid;
+
   place-items: center;
 
   cursor: pointer;
@@ -334,18 +546,23 @@ h1 {
 
   border-radius: 15px;
 
-  transition: 0.18s ease;
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
 }
 
 .coin:hover:not(:disabled) {
   transform: translateY(-3px);
 
   border-color: #52647d;
+
   background: #151b24;
 }
 
 .coin:disabled {
   opacity: 0.45;
+
   cursor: not-allowed;
 }
 
@@ -357,7 +574,9 @@ h1 {
 
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+
   user-select: none;
+
   -webkit-user-drag: none;
 }
 
@@ -369,13 +588,16 @@ h1 {
   margin-top: 14px;
 
   display: flex;
+
   align-items: center;
 
   gap: 12px;
 
-  border: 1px solid rgba(82, 224, 167, 0.28);
+  border: 1px solid
+    rgba(82, 224, 167, 0.28);
 
-  background: rgba(82, 224, 167, 0.07);
+  background:
+    rgba(82, 224, 167, 0.07);
 
   border-radius: 15px;
 
@@ -386,6 +608,7 @@ h1 {
 
 .success-icon {
   display: grid;
+
   place-items: center;
 
   width: 36px;
@@ -393,7 +616,8 @@ h1 {
 
   border-radius: 10px;
 
-  background: rgba(82, 224, 167, 0.12);
+  background:
+    rgba(82, 224, 167, 0.12);
 }
 
 .success strong,
@@ -439,6 +663,7 @@ h1 {
   display: flex;
 
   justify-content: center;
+
   align-items: center;
 
   gap: 7px;
@@ -456,6 +681,7 @@ h1 {
 
 .side {
   display: grid;
+
   gap: 18px;
 }
 
@@ -468,6 +694,7 @@ h1 {
   display: flex;
 
   justify-content: space-between;
+
   align-items: center;
 }
 
@@ -525,16 +752,21 @@ h1 {
 
   color: #8b95a7;
 
-  transition: 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .state-node span {
   font-weight: 800;
+
   font-size: 13px;
 }
 
 .state-node small {
   color: #626c7f;
+
   font-size: 9px;
 }
 
@@ -545,7 +777,9 @@ h1 {
 
   border-color: #52e0a7;
 
-  box-shadow: 0 0 26px rgba(82, 224, 167, 0.24);
+  box-shadow:
+    0 0 26px
+    rgba(82, 224, 167, 0.24);
 
   transform: scale(1.08);
 }
@@ -724,6 +958,7 @@ h1 {
 
 .history-row b {
   color: #677286;
+
   font-size: 10px;
 }
 
@@ -791,6 +1026,19 @@ footer {
   .layout {
     grid-template-columns: 1fr;
   }
+
+  .home-character {
+    width: 55%;
+  }
+
+  .home-character img {
+    width: 100%;
+    max-width: 520px;
+  }
+
+  .home-dialog {
+    margin-left: 28%;
+  }
 }
 
 @media (max-width: 600px) {
@@ -806,11 +1054,66 @@ footer {
     flex-direction: column;
   }
 
+  .machine-content {
+    grid-template-columns:
+      minmax(0, 1fr)
+      100px;
+
+    gap: 10px;
+  }
+
+  .machine-content .coin-area {
+    margin: 10px 0;
+  }
+
   .coin {
     min-height: 90px;
   }
 
-  footer {
-    flex-direction: column;
+  .home {
+    min-height: 100vh;
+
+    align-items: flex-start;
+
+    padding-top: 50px;
   }
+
+  .home-character {
+    width: 92%;
+
+    min-width: 260px;
+
+    left: 0;
+    bottom: 0;
+  }
+
+  .home-character img {
+    width: 100%;
+
+    max-width: 430px;
+  }
+
+  .home-dialog {
+    width: min(
+      420px,
+      calc(100% - 30px)
+    );
+
+    margin-left: 20%;
+    margin-right: 15px;
+
+    margin-top: 80px;
+
+    padding: 24px;
+  }
+
+  .home-dialog h1 {
+    font-size: 34px;
+  }
+
+  .home-dialog p {
+    font-size: 16px;
+  }
+
+  
 }
