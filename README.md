@@ -109,13 +109,66 @@ q25  → 25 centavos
 
 <div align="center">
 
-Todas sprites/assets foram feitas por mim mesmo usando o **Aseprite**
+Todas as sprites utilizadas no projeto foram criadas por mim utilizando o **Aseprite**.
+
 </div>
 
+As **sprites** são imagens utilizadas para representar visualmente os
+elementos do projeto. Neste caso, elas foram utilizadas para compor a
+interface da máquina de vendas, representar as moedas e criar o personagem
+presente na tela inicial.
+
+## O Velho
+
+O personagem presente na tela inicial foi criado para representar o dono da
+máquina de vendas e introduzir o jogador à aplicação.
+
+<div align="center"> <img src="./src/assets/Oldman.png" width="400" alt="Sprite do Velho"> </div>
+
+## Máquina de vendas
+
+A sprite principal representa a parte frontal da máquina de vendas.
+
+<div align="center">
+
+<img src="./src/assets/VendingFront.png" width="250" alt="Sprite da frente da máquina de vendas">
+
+</div>
+
+## Saída do produto
+
+Essa sprite representa o compartimento onde o produto é entregue ao jogador.
+
+<div align="center">
+
+<img src="./src/assets/VendingOutput.png" width="350" alt="Sprite da saída do produto">
+
+</div>
+
+## Moedas
+
+As moedas aceitas pela máquina também foram criadas individualmente como
+sprites.
+
+<div align="center">
+
+<img src="./src/assets/5coin.png" width="120" alt="Sprite da moeda de 5 centavos">
+<img src="./src/assets/10coin.png" width="120" alt="Sprite da moeda de 10 centavos">
+<img src="./src/assets/25coin.png" width="120" alt="Sprite da moeda de 25 centavos">
+
+</div>
+
+As três sprites representam as entradas aceitas pelo autômato:
+
+```text
+5¢  → moeda de 5 centavos
+10¢ → moeda de 10 centavos
+25¢ → moeda de 25 centavos
+```
 ---
 
 <div align="center">
 
-João Paulo Kowalski
+By: João Paulo Kowalski
 
 </div>
