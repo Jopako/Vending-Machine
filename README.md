@@ -1,62 +1,121 @@
-# 🥤 Vending Machine — Autômato Finito
+<div align="center">
 
-Trabalho 01 de Linguagens Formais e Autômatos.
+<img width="700" src="./assets/VendingFront.png" alt="Vending Machine">
 
-## Objetivo
+### Vending Machine — Autômato Finito com Saída
 
-Modelar uma máquina de venda automática que aceita moedas de **5¢, 10¢ e 25¢** e libera um produto de **30¢**.
+<p>
+Uma máquina de vendas que aceita moedas de 5, 10 e 25 centavos
+e entrega um produto por 30 centavos.
+</p>
 
-O projeto possui:
+</div>
 
-- interface interativa;
-- visualização do estado atual;
-- animação visual das transições;
-- histórico da execução;
-- cálculo de troco;
-- arquivo de modelagem para JFLAP.
+---
 
-## Modelo
+<p align="center">
 
-Estados:
+<a href="https://vending-machine-sooty.vercel.app/">
+  <img src="https://img.shields.io/badge/Vercel-VENDING%20MACHINE-black?style=for-the-badge" alt="Vercel Vending Machine">
+</a>
 
-`Q = {q0, q5, q10, q15, q20, q25, q30}`
+<a href="https://jopako.github.io/Vending-Machine/">
+  <img src="https://img.shields.io/badge/GITHUB%20PAGES-ONLINE-black?style=for-the-badge" alt="GitHub Pages">
+</a>
 
-Alfabeto:
+</p>
 
-`Σ = {5, 10, 25}`
+---
 
-Estado inicial:
+## Sobre o projeto
 
-`q0`
+**Vending Machine** é uma simulação web de uma máquina de vendas
+modelada utilizando um **Autômato Finito com Saída**.
 
-Estado de aceitação/liberação:
+A máquina aceita moedas de:
 
-`q30`
+- **5 centavos**
+- **10 centavos**
+- **25 centavos**
 
-A transição é:
+O produto possui valor fixo de **30 centavos**.
 
-`δ(q, moeda) = min(q + moeda, 30)`
+O sistema acompanha o saldo acumulado por meio dos estados do
+autômato e, quando o valor inserido atinge ou ultrapassa 30 centavos,
+a máquina libera o produto e calcula o troco.
 
-Quando o saldo chega a 30¢ ou mais, o produto é liberado. O excedente é devolvido como troco e a máquina pode ser reiniciada para uma nova compra.
+O projeto foi desenvolvido como parte da disciplina de
+**Teoria da Computação**, buscando transformar o modelo formal de um
+autômato em uma aplicação web interativa e visual.
 
-## Executar
+---
 
-```bash
-npm install
-npm run dev
+# Interfaces
+
+## Introdução
+
+<img width="1098" height="927" alt="image" src="https://github.com/user-attachments/assets/16aacff0-83d0-4c91-9f0f-ef943e6e1c8a" />
+
+## Vending Machine
+
+<img width="1542" height="897" alt="image" src="https://github.com/user-attachments/assets/2e4fe77f-390c-43da-8fe0-f279d08d5bbf" />
+
+---
+
+## Como funciona
+
+A máquina utiliza estados que representam o valor acumulado:
+
+```text
+q0   → 0 centavos
+q5   → 5 centavos
+q10  → 10 centavos
+q15  → 15 centavos
+q20  → 20 centavos
+q25  → 25 centavos
 ```
 
-## Build
+---
 
-```bash
-npm run build
-npm run preview
-```
+# Tecnologias utilizadas
 
-## JFLAP
+## Frontend
 
-O arquivo `jflap/vending-machine.jff` contém a modelagem do autômato.
+<div align="center">
 
-## Demonstração online
+[![My Skills](https://skillicons.dev/icons?i=react,typescript,vite,css)](https://skillicons.dev)
 
-O projeto pode ser publicado como site estático. O Vite gera a pasta `dist` no build e suporta publicação em GitHub Pages.
+</div>
+
+- **React** — construção da interface e componentes
+- **TypeScript** — tipagem e implementação da lógica
+- **Vite** — ambiente de desenvolvimento e build
+- **CSS** — estilização, layout e responsividade
+
+---
+
+## Modelagem do Autômato
+
+<div align="center">
+
+
+</div>
+
+- **JFLAP** — criação, visualização e testes do autômato
+- **Máquina de Mealy** — modelo utilizado para representar as transições e saídas
+- **Autômato Finito com Saída** — modelagem formal da máquina de vendas
+---
+# Sprites
+
+<div align="center">
+
+Todas sprites/assets foram feitas por mim mesmo usando o **Aseprite**
+</div>
+
+---
+
+<div align="center">
+
+João Paulo Kowalski
+
+</div>
