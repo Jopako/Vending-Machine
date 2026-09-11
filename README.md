@@ -1,6 +1,6 @@
 <div align="center">
+<div align="center"> <img src="./src/assets/robo2.png" width="150" alt="Sprite do Velho"> </div>
 
-<img width="700" src="./assets/VendingFront.png" alt="Vending Machine">
 
 ### Vending Machine — Autômato Finito com Saída
 
